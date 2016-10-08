@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 class main {
     public static void main(String[] args) {
-		JFrame window = new JFrame("Lab 2");
+		JFrame window = new JFrame("Lab 3");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		landlinePhone phone = new landlinePhone(false,false,true);
@@ -13,15 +13,28 @@ class main {
 		JButton greenTube = new JButton("green");
 		JButton redTube = new JButton("red");
 		JButton btnIncomingCall = new JButton("Test incoming call");
-		JColorChooser col = new JColorChooser();
-		
+		JButton setCol = new JButton("Open ColorChooser");
 		
 		window.getContentPane().add(myNam,BorderLayout.NORTH);
 		window.getContentPane().add(greenTube,BorderLayout.WEST);
 		window.getContentPane().add(redTube,BorderLayout.EAST);
 		window.getContentPane().add(btnIncomingCall,BorderLayout.CENTER);
-		window.getContentPane().add(col,BorderLayout.SOUTH);
+		window.getContentPane().add(setCol,BorderLayout.SOUTH);
 		window.setSize(300,100);
+		
+		setCol.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					phone.openColChooser();
+					setCol.setBackground(phone.colorBackground);
+					myNam.setBackground(phone.colorBackground);
+					greenTube.setBackground(phone.colorBackground);
+					redTube.setBackground(phone.colorBackground);
+					btnIncomingCall.setBackground(phone.colorBackground);
+				}
+			}
+		);
 		
 		myNam.addActionListener(new ActionListener() 
 			{
@@ -65,6 +78,7 @@ class landlinePhone {
 	boolean call;
 	boolean tubeOnPhone;
 	int number;
+	Color colorBackground = Color.white;
 
 	//конструктори
 	landlinePhone()
@@ -93,6 +107,12 @@ class landlinePhone {
 	String replics2 = "Talk";
 	String replics3 = "Finished talking";
 	String replics4 = "Call";
+	
+	void openColChooser()
+	{
+		 colorBackground = JColorChooser.showDialog(null, "Choose a background",colorBackground);
+	}
+	
 	
 	void clickGreenBtn()
 	{
@@ -130,6 +150,7 @@ class landlinePhone {
 		call = false;
 		tubeOnPhone = true;
 		printVar();
+		Color col;
 	}
 	void printMyNumber()
 	{
