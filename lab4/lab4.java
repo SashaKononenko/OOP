@@ -43,7 +43,7 @@ class main
 		JTextArea result = new JTextArea();
 		
 		//Вивдення елементів
-		GridLayout gbl = new GridLayout(7,2);
+		GridLayout gbl = new GridLayout(7,0);
 		window.setLayout(gbl);
 		
 		window.getContentPane().add(lab1);
