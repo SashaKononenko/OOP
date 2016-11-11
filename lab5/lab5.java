@@ -1,13 +1,10 @@
-/*
-Треба щоб обєкт Cup наслідував Dishes виникло 2 проблеми!
-*/
-
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
 
 class main
 {
+	static dishes dis;
 	public static void main(String[] args)
 	{
 		JFrame window = new JFrame("Lab5");
@@ -32,7 +29,7 @@ class main
 		//Виведення елементів в вікно
 		window.getContentPane().add(constr);
 		window.getContentPane().add(create);
-		window.getContentPane().add(set);
+		//window.getContentPane().add(set);
 		window.getContentPane().add(pnl);
 		window.getContentPane().add(showRes);
 		window.getContentPane().add(result);
@@ -49,21 +46,32 @@ class main
 				{
 					if ((String)constr.getSelectedItem() == "dishes(String a)")
 					{
-						dishes Dishes =  new dishes("Glass");
-						
+						dishes Dishes = new dishes("Glass");
+						Dishes.DrawWindow();
 					}
 					if ((String)constr.getSelectedItem() == "dishes(int a)")
 					{
 						dishes Dishes =  new dishes(143);
+						Dishes.DrawWindow();
 					}
 					if ((String)constr.getSelectedItem() == "cup(int a, int b, int c)")
 					{
 						cup Cup =  new cup(23,12,43);
+						Cup.DrawWindow();
 					}
 					if ((String)constr.getSelectedItem() == "cup(int a, int b)")
 					{
 						cup Cup =  new cup(12,23);
+						Cup.DrawWindow();
 					}
+					result.setText("Create object");
+				}
+			}						
+		);
+		set.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
 				}
 			}						
 		);
@@ -75,6 +83,11 @@ class dishes extends JPanel
 	Color col;
 	String material;
 	int prise;
+	
+	dishes() {
+		
+	}
+	
 	//Конструктори
 	dishes(String a)
 	{
@@ -85,13 +98,15 @@ class dishes extends JPanel
 		prise = a;
 	}
 	//Методи
-	void DrawWindowDishes()
+	void DrawWindow()
 	{
 		JFrame SetWin = new JFrame("Setting cup");
 		GridLayout gbl = new GridLayout(4,1);
 		SetWin.setLayout(gbl);
 		
 		JButton changeCol = new JButton("");
+		changeCol.setBackground(col);
+		col = Color.white;
 		
 		String[] listMaterials = {
 			"Glass",
@@ -114,7 +129,15 @@ class dishes extends JPanel
 		SetWin.getContentPane().add(prs);
 		SetWin.setVisible(true);
 		SetWin.setSize(500,300);
-		
+		changeCol.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+						col = JColorChooser.showDialog(null, "Choose a background",col);
+						changeCol.setBackground(col);
+				}
+			}
+		);
 		
 	}
 }
