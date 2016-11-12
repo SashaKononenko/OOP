@@ -1,5 +1,4 @@
 
-//Треба  створити 2 варіант і замінити параметри класів відповідно до варіантів!
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
