@@ -4,7 +4,7 @@ import com.bruceeckel.simpletest.*;
 import java.util.*;
 
 public class PrintingContainers {
-  //private static Test monitor = new Test();
+  private static Test monitor = new Test();
   static Collection fill(Collection c) {
     c.add("dog");
     c.add("dog");

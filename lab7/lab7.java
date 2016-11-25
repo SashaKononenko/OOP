@@ -15,14 +15,15 @@ class main
 		window.setLayout(gbl);
 		
 		String[] listObj= {
-			"obj1",
-			"obj2",
-			"obj3"
+			"JustJpanel",
+			"Telephone",
+			"Phone"
 		};
 		JComboBox comboBoxObj = new JComboBox(listObj);
 		JButton create = new JButton("Create");
-		
-		
+		//Колекция 
+		List listObj = new ArrayList();
+			listObj.add();
 		window.getContentPane().add(comboBoxObj);
 		window.getContentPane().add(create);
 		
@@ -161,6 +162,18 @@ class Start
 			}						
 		);
 
+	}
+}
+
+class JustJpanel extends JPenel
+{
+	x = 10;
+	y = 10;
+	height = 50;
+	width = 50;
+	public void paint (Graphics g) 
+	{
+		g.drawRect(x,y,height,wight);
 	}
 }
 
