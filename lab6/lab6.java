@@ -64,7 +64,7 @@ class StartV1
 		
 		String[] listConstr = {
 			"Telephone(String a)",
-			"Telephone(int a)",
+			"Telephone(String a,int b)",
 			"Phone(int a, int b, int c)",
 			"Phone(int a, int b)"
 		};
@@ -107,9 +107,9 @@ class StartV1
 						window.getContentPane().repaint();
 						window.getContentPane().add(telephone);
 					}
-					if ((String)constr.getSelectedItem() == "Telephone(int a)")
+					if ((String)constr.getSelectedItem() == "Telephone(String a,int b)")
 					{
-						telephone =  new Telephone(143);
+						telephone =  new Telephone("Alcatel",143);
 						window.getContentPane().repaint();
 						window.getContentPane().add(telephone);
 					}
@@ -183,7 +183,7 @@ class StartV2
 		
 		String[] listConstr = {
 			"Telephone(String a)",
-			"Telephone(int a)",
+			"Telephone(String a,int b)",
 			"Phone(int a, int b, int c)",
 			"Phone(int a, int b)"
 		};
@@ -220,9 +220,9 @@ class StartV2
 						window.getContentPane().repaint();
 						window.getContentPane().add(BaseСlass);
 					}
-					if ((String)constr.getSelectedItem() == "Telephone(int a)")
+					if ((String)constr.getSelectedItem() == "Telephone(String a,int b)")
 					{
-						BaseСlass =  new Telephone(143);
+						BaseСlass =  new Telephone("Alcatel",143);
 						window.getContentPane().repaint();
 						window.getContentPane().add(BaseСlass);
 					}
@@ -267,6 +267,7 @@ class StartV2
 				}
 			}						
 		);
+		
 
 	}
 }
@@ -287,9 +288,10 @@ class Telephone extends JPanel
 	{
 		maker = a;
 	}
-	Telephone(int a)
+	Telephone(String a,int b)
 	{
-		prise = a;
+		maker = a;
+		prise = b;
 	}
 	//Методи
 	public void paint (Graphics g) 

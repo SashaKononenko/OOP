@@ -2,182 +2,175 @@
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 class main
 {
+	static JustJpanel BaseСlass;
+	static int index;
 	public static void main(String[] args)
 	{
+
 		JFrame window = new JFrame("Lab7");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Елементи інтерфейсу:
-		GridLayout gbl = new GridLayout(2,1);
+		GridLayout gbl = new GridLayout(3,0);
 		window.setLayout(gbl);
-		
+		//Колекция 
+		List Obj = new ArrayList();
+
+		Random random = new Random();
+		int order[] = new int[3];
+		do 
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				order[i] = random.nextInt(3)+1;
+				//System.out.println(order[i]);
+			}
+		} while(order[0] == order[1] || order[1] == order[2] || order[2] == order[0] );
+
+		//Заповнення колекції
+		for (int i : order) 
+		{
+			if(i == 1)
+				Obj.add(new JustJpanel());
+			if(i == 2)
+				Obj.add(new Telephone());	
+			if(i == 3)
+				Obj.add(new Phone(12,12));
+		}
+
+
 		String[] listObj= {
-			"JustJpanel",
-			"Telephone",
-			"Phone"
+			String.valueOf(Obj.get(0).getClass()),
+			String.valueOf(Obj.get(1).getClass()),
+			String.valueOf(Obj.get(2).getClass())
 		};
 		JComboBox comboBoxObj = new JComboBox(listObj);
-		JButton create = new JButton("Create");
-		//Колекция 
-		List listObj = new ArrayList();
-			listObj.add();
-		window.getContentPane().add(comboBoxObj);
-		window.getContentPane().add(create);
-		
-		window.setVisible(true);
-		window.setSize(270,100);
-		
-		
-		
-		Start start = new Start();
-		/* var1.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					startV1.StartProg();
-				}
-			}						
-		); */
-
-	}
-}
-
-
-class Start
-{
-	Telephone telephone;
-	Phone phone;
-	public  void StartProg()
-	{
-		JFrame window = new JFrame("Variant 1");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//Елементи інтерфейсу:
-		GridLayout gbl = new GridLayout(3,2);
-		window.setLayout(gbl);
-		
-		String[] listConstr = {
-			"Telephone(String a)",
-			"Telephone(int a)",
-			"Phone(int a, int b, int c)",
-			"Phone(int a, int b)"
-		};
-		JPanel pnl = new JPanel();
+		JButton sel = new JButton("Select");
 		JButton set = new JButton("Setting");
-		JComboBox constr = new JComboBox(listConstr);
-		JButton create = new JButton("Create");
+
 		JTextArea result = new JTextArea();
 		JButton showRes = new JButton("Output data");
 		//Виведення елементів в вікно
-		window.getContentPane().add(constr);
-		window.getContentPane().add(create);
+		
+		window.getContentPane().add(comboBoxObj);
+		window.getContentPane().add(sel);
 		window.getContentPane().add(showRes);
 		window.getContentPane().add(result);
 		window.getContentPane().add(set);
-		//window.getContentPane().add(pnl);
 		
 		window.setVisible(true);
 		window.setSize(500,300);
 		
-		create.addActionListener(new ActionListener()
+
+		sel.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					if(telephone != null)
-					{
-						window.getContentPane().remove(telephone);
-						telephone = null;
-					}
-					if(phone != null)
-					{
-						window.getContentPane().remove(phone);
-						phone = null;
-
-					}
-
-					if ((String)constr.getSelectedItem() == "Telephone(String a)")
-					{
-						telephone = new Telephone("Alcatel");
-						window.getContentPane().repaint();
-						window.getContentPane().add(telephone);
-					}
-					if ((String)constr.getSelectedItem() == "Telephone(int a)")
-					{
-						telephone =  new Telephone(143);
-						window.getContentPane().repaint();
-						window.getContentPane().add(telephone);
-					}
-					if ((String)constr.getSelectedItem() == "Phone(int a, int b, int c)")
-					{
-						phone =  new Phone(23,12,43);
-						window.getContentPane().repaint();
-						window.getContentPane().add(phone);
-					}
-					if ((String)constr.getSelectedItem() == "Phone(int a, int b)")
-					{
-						phone =  new Phone(12,23);
-						window.getContentPane().repaint();
-						window.getContentPane().add(phone);
-					}
-					result.setText("Create object");
+					result.setText("r");
+						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(0).getClass()))
+							BaseСlass = Obj.get(0).getClass()
+						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(1).getClass()))
+							BaseСlass = (JustJpanel)Obj.get(1);
+						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(2).getClass()))
+							BaseСlass = (JustJpanel)Obj.get(2);
+						result.setText(BaseСlass.outputData());
 				}
-			}						
+			}
+						
 		);
 		set.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					if(telephone != null)
+					/*for(int i = 0; i < 3; i++)
 					{
-						telephone.DrawWindow();
+						index = i;
+						//window.getContentPane().remove(Obj.get(index));
 					}
-					if(phone != null)
-					{
-						phone.DrawWindow();
-					}
+					//Тут інтерпретатор треба
+					window.getContentPane().repaint();
+					window.getContentPane().add(Obj.get(index));*/
+					BaseСlass.DrawWindow();
 				}
-			}						
+			}
+						
 		);
-		showRes.addActionListener(new ActionListener()
+
+	}
+}
+
+class JustJpanel extends JPanel
+{
+	int x = 10;
+	int y = 10;
+	int height = 50;
+	int width = 50;
+	public void paint (Graphics g) 
+	{
+		g.drawRect(x,y,height,width);
+	}
+	void DrawWindow()
+	{
+		JFrame SetWin = new JFrame("Setting telephone");
+		GridLayout gbl = new GridLayout(5,1);
+		SetWin.setLayout(gbl);
+		SetWin.setLocation(0,350);
+
+		JTextField  _x = new JTextField();
+		JTextField  _y = new JTextField();
+		JTextField  _h = new JTextField();
+		JTextField  _w = new JTextField();
+		JLabel L_x = new JLabel("X:");
+		JLabel L_y = new JLabel("Y:");
+		JLabel L_height = new JLabel("Height:");
+		JLabel L_width = new JLabel("Width:");
+		JButton apply = new JButton("Input data");
+
+		SetWin.getContentPane().add(L_x);
+		SetWin.getContentPane().add(_x);
+		SetWin.getContentPane().add(L_y);
+		SetWin.getContentPane().add(_x);
+		SetWin.getContentPane().add(L_height);
+		SetWin.getContentPane().add(_h);
+		SetWin.getContentPane().add(L_width);
+		SetWin.getContentPane().add(_w);
+		SetWin.getContentPane().add(apply);
+		
+		SetWin.setVisible(true);
+		SetWin.setSize(600,300);
+		
+
+		apply.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e)
 				{
+					inputData(_x, _y, _h, _w);
 					
-					if(telephone != null)
-					{
-						window.getContentPane().repaint();
-						window.getContentPane().add(telephone);
-						result.setText(telephone.outputData());
-					}
-					if(phone != null)
-					{
-						window.getContentPane().repaint();
-						window.getContentPane().add(phone);
-						result.setText(phone.outputData());
-					}
 				}
-			}						
+			}
 		);
-
 	}
-}
-
-class JustJpanel extends JPenel
-{
-	x = 10;
-	y = 10;
-	height = 50;
-	width = 50;
-	public void paint (Graphics g) 
+	void inputData(JTextField a, JTextField b, JTextField c, JTextField d)
 	{
-		g.drawRect(x,y,height,wight);
+		x = Integer.parseInt(a.getText());
+		y = Integer.parseInt(b.getText());
+		height = Integer.parseInt(c.getText());
+		width = Integer.parseInt(d.getText());
+	}
+
+	String outputData()
+	{
+		String a = "x:"+x+"\n"+"y:"+y+"\n"+"height:"+height+"\n"+"width:"+width;
+		return a;
 	}
 }
 
-class Telephone extends JPanel
+class Telephone extends JustJpanel
 {
 	Color col;
 	String maker;
@@ -350,22 +343,3 @@ class Phone extends Telephone
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

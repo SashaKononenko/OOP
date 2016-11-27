@@ -18,7 +18,7 @@ class main
 		
 		String[] listConstr = {
 			"dishes(String a)",
-			"dishes(int a)",
+			"dishes(String a, int b)",
 			"cup(int a, int b, int c)",
 			"cup(int a, int b)"
 		};
@@ -61,9 +61,9 @@ class main
 						window.getContentPane().repaint();
 						window.getContentPane().add(Dishes);
 					}
-					if ((String)constr.getSelectedItem() == "dishes(int a)")
+					if ((String)constr.getSelectedItem() == "dishes(String a, int b)")
 					{
-						Dishes =  new dishes(143);
+						Dishes =  new dishes("Glass",10);
 						window.getContentPane().repaint();
 						window.getContentPane().add(Dishes);
 					}
@@ -133,7 +133,7 @@ class dishes extends JPanel
 	int prise;
 	
 	dishes() {
-		
+
 	}
 	
 	//Конструктори
@@ -141,9 +141,10 @@ class dishes extends JPanel
 	{
 		material = a;
 	}
-	dishes(int a)
+	dishes(String a, int b)
 	{
-		prise = a;
+		material = a;
+		prise = b;
 	}
 	//Методи
 	public void paint (Graphics g) 
