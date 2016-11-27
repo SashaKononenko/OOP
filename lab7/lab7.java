@@ -9,7 +9,7 @@ import java.util.Random;
 class main
 {
 	static JustJpanel BaseСlass;
-	static int index;
+	static int index = 1;
 	public static void main(String[] args)
 	{
 
@@ -71,14 +71,11 @@ class main
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					result.setText("r");
-						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(0).getClass()))
-							BaseСlass = Obj.get(0).getClass()
-						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(1).getClass()))
-							BaseСlass = (JustJpanel)Obj.get(1);
-						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(2).getClass()))
-							BaseСlass = (JustJpanel)Obj.get(2);
-						result.setText(BaseСlass.outputData());
+					//result.setText("r");
+					for (int i = 0; i < 3; i++)
+						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(i).getClass()))
+								index = i;
+					result.setText("i = "+index);
 				}
 			}
 						
@@ -87,15 +84,19 @@ class main
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					/*for(int i = 0; i < 3; i++)
-					{
-						index = i;
-						//window.getContentPane().remove(Obj.get(index));
-					}
-					//Тут інтерпретатор треба
-					window.getContentPane().repaint();
-					window.getContentPane().add(Obj.get(index));*/
-					BaseСlass.DrawWindow();
+					((JustJpanel)Obj.get(index)).DrawWindow();
+					/*switch(index) {
+
+					    case 0: 
+						    ((JustJpanel)Obj.get(0)).DrawWindow();
+							break;
+						case 1: 
+						    ((Telephone)Obj.get(1)).DrawWindow();
+							break;
+						case 2: 
+						    ((Phone)Obj.get(2)).DrawWindow();
+							break;
+					}*/
 				}
 			}
 						
