@@ -9,7 +9,7 @@ import java.util.Random;
 class main
 {
 	static JustJpanel BaseСlass;
-	static int index = 1;
+	static int index = 3;
 	public static void main(String[] args)
 	{
 
@@ -38,7 +38,7 @@ class main
 			if(i == 1)
 				Obj.add(new JustJpanel());
 			if(i == 2)
-				Obj.add(new Telephone());	
+				Obj.add(new Telephone("Alcatel"));	
 			if(i == 3)
 				Obj.add(new Phone(12,12));
 		}
@@ -71,11 +71,11 @@ class main
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					//result.setText("r");
+					if (index < 3)
+						window.getContentPane().remove((JustJpanel)Obj.get(index));
 					for (int i = 0; i < 3; i++)
-						if((String)comboBoxObj.getSelectedItem() == String.valueOf(Obj.get(i).getClass()))
+						if((String)comboBoxObj.getSelectedItem() == listObj[i])
 								index = i;
-					result.setText("i = "+index);
 				}
 			}
 						
@@ -85,18 +85,18 @@ class main
 				public void actionPerformed(ActionEvent e)
 				{
 					((JustJpanel)Obj.get(index)).DrawWindow();
-					/*switch(index) {
-
-					    case 0: 
-						    ((JustJpanel)Obj.get(0)).DrawWindow();
-							break;
-						case 1: 
-						    ((Telephone)Obj.get(1)).DrawWindow();
-							break;
-						case 2: 
-						    ((Phone)Obj.get(2)).DrawWindow();
-							break;
-					}*/
+				}
+			}
+						
+		);
+		showRes.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					window.getContentPane().remove((JustJpanel)Obj.get(index));
+					window.getContentPane().repaint();
+					window.getContentPane().add((JustJpanel)Obj.get(index));
+					result.setText(((JustJpanel)Obj.get(index)).outputData());
 				}
 			}
 						
@@ -117,8 +117,8 @@ class JustJpanel extends JPanel
 	}
 	void DrawWindow()
 	{
-		JFrame SetWin = new JFrame("Setting telephone");
-		GridLayout gbl = new GridLayout(5,1);
+		JFrame SetWin = new JFrame("Setting class Jpanel");
+		GridLayout gbl = new GridLayout(5,2);
 		SetWin.setLayout(gbl);
 		SetWin.setLocation(0,350);
 
@@ -135,7 +135,7 @@ class JustJpanel extends JPanel
 		SetWin.getContentPane().add(L_x);
 		SetWin.getContentPane().add(_x);
 		SetWin.getContentPane().add(L_y);
-		SetWin.getContentPane().add(_x);
+		SetWin.getContentPane().add(_y);
 		SetWin.getContentPane().add(L_height);
 		SetWin.getContentPane().add(_h);
 		SetWin.getContentPane().add(L_width);
